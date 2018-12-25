@@ -10,20 +10,27 @@ class TestOpenCV:
         print("[1] Open CV Test")
         print("[2] Translation")
         print("[3] ImageThresholding")
+        print("[4] Gradiente")
         print("[5] Detector de borda")
+
         teste = input()
         if teste is "0":
             TestOpenCV.CamTeste(object)
         if teste is "1":
-            TestOpenCV.OpenCVTeste(object)
+            TestOpenCV.ColorDetection(object)
         if teste is '2':
             TestOpenCV.TranslationCam(object)
         if teste is '3':
             TestOpenCV.ImageThresholding(object)
+        if teste is '4':
+            TestOpenCV.ImageGradiente(object)
         if teste is '5':
             TestOpenCV.EdgeDetector(object)
+        if teste is '6':
+            TestOpenCV.EdgeDetectorVideo(object)
 
     def CamTeste(self):
+        print("Executando gray cam")
         cap = cv2.VideoCapture(0)
 
         while (True):
@@ -42,8 +49,7 @@ class TestOpenCV:
         cap.release()
         cv2.destroyAllWindows()
 
-    def OpenCVTeste(self):
-
+    def ColorDetection(self):
         print("Executando Color filter azul")
         cap = cv2.VideoCapture(0)
 
@@ -75,6 +81,7 @@ class TestOpenCV:
         cv2.destroyAllWindows()
 
     def TranslationCam(self):
+        print("Executando tranlação de imagem")
         img = cv2.imread('translation.jpg', 0)
         rows, cols = img.shape
 
@@ -86,6 +93,7 @@ class TestOpenCV:
         cv2.destroyAllWindows()
 
     def ImageThresholding(self):
+        print("Executando Image Thresholding")
         img = cv2.imread('translation.jpg', 0)
         img = cv2.medianBlur(img, 5)
 
@@ -106,6 +114,7 @@ class TestOpenCV:
         plt.show()
 
     def EdgeDetector(self):
+        print("deteção de borda")
         img = cv2.imread('translation.jpg', 0)
         edges = cv2.Canny(img, 100, 200)
 
@@ -115,3 +124,23 @@ class TestOpenCV:
         plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
 
         plt.show()
+
+    def ImageGradiente(self):
+        img = cv2.imread('translation.jpg', 0)
+
+        laplacian = cv2.Laplacian(img, cv2.CV_64F)
+        sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5)
+        sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=5)
+
+        plt.subplot(2, 2, 1), plt.imshow(img, cmap='gray')
+        plt.title('Original'), plt.xticks([]), plt.yticks([])
+        plt.subplot(2, 2, 2), plt.imshow(laplacian, cmap='gray')
+        plt.title('Laplacian'), plt.xticks([]), plt.yticks([])
+        plt.subplot(2, 2, 3), plt.imshow(sobelx, cmap='gray')
+        plt.title('Sobel X'), plt.xticks([]), plt.yticks([])
+        plt.subplot(2, 2, 4), plt.imshow(sobely, cmap='gray')
+        plt.title('Sobel Y'), plt.xticks([]), plt.yticks([])
+
+        plt.show()
+
+
