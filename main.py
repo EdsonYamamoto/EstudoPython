@@ -2,12 +2,13 @@ from Person import Person
 from Controller import Controller
 from MachineLearning import MachineLearning
 from OpenCV import OpenCV
-from LeitorPlaca.LeitorPlaca import LeitorPlacaClass
+from LeitorPlaca.Main import MetodoStart
 from TestesModulos.testPlotly import TestPlotly
 from TestesModulos.testMatPlotLib import TestMatPlotLib
 from TestesModulos.testPandas import TestPandas
 from TestesModulos.testSeaborn import TestSeaborn
 from TestesModulos.testOpenCV import TestOpenCV
+from TestesModulos.testPymongo import TestPymongo
 from TestesModulos.testSinespiClient import TestSinesp
 
 class main:
@@ -29,6 +30,7 @@ class main:
             print("[5] pandas")
             print("[6] seaborn")
             print("[7] Open CV")
+            print("[8] MongoDB")
 
             print("Comando ")
             operacao = input()
@@ -59,6 +61,9 @@ class main:
             if operacao is '7':
                 TestOpenCV.OpenCVPrinc(object)
 
+            if operacao is '8':
+                TestPymongo.PymongoTest(object)
+
         if operacao is '1':
             print("[0] OpenCV")
             print("[1]Leitor camera")
@@ -67,7 +72,7 @@ class main:
                 OpenCV.OpenCV.EdgeDetectorVideo(object)
 
             if operacao is '1':
-                LeitorPlacaClass.MetodoInicial(object)
+                MetodoStart.Start(object)
 
         if operacao is '2':
             print("[0] Sinespi")

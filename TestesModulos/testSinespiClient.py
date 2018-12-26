@@ -9,6 +9,8 @@ class TestSinesp:
             TestSinesp.Teste1(object)
 
     def Teste1(self):
+        print("Digite placa do carro")
+        placa = input()
         sc = SinespClient()
-        result = sc.search('EYB2903')
+        result = sc.search(placa)
         print(result)
